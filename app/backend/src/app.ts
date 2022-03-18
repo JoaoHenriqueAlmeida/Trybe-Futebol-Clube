@@ -18,13 +18,15 @@ class App {
       next();
     };
 
-    this.app.use(accessControl);
-    // ...
+    this.app.use(accessControl, () => {
+      console.log(`Rodando na porta ${process.env.PORT}`)
+    });
+    
   }
 
   // ...
   public start(PORT: string | number):void {
-    // ...
+    this.app.listen(PORT)
   }
 }
 
