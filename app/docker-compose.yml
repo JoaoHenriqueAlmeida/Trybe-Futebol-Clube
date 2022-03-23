@@ -22,7 +22,7 @@ services:
       - PORT=3001
       
       - DB_USER=root
-      - DB_PASS=store-manager
+      - DB_PASS=123456
       - DB_HOST=db
       - DB_NAME=TRYBE_FUTEBOL_CLUBE
       - DB_PORT=3306
