@@ -1,7 +1,5 @@
 import * as express from 'express';
 
-require('dotenv').config();
-
 class App {
   public app: express.Express;
 
@@ -20,6 +18,8 @@ class App {
 
     this.app.use(accessControl);
     this.app.use(express.json());
+    this.app.route('/login')
+      .post();
   }
 
   // ...
