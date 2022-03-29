@@ -25,8 +25,6 @@ const loginValidationMid = async (req:Request, res:Response, next:NextFunction) 
 
   const { error } = loginSchema.validate({ email, password });
 
-  console.log(error);
-
   if (error) {
     return res.status(StatusCodes.Unauthorized).json({ message: error.message });
   }
