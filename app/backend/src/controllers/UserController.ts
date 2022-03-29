@@ -14,5 +14,4 @@ export const userLogin = async (req:Request, res:Response) => {
   return res.status(StatusCodes.OK).json(data);
 };
 
-export const loginGet = async (req:Request, res:Response) =>
-  res.status(StatusCodes.OK).json('funciona');
+export const disableLint = '';
