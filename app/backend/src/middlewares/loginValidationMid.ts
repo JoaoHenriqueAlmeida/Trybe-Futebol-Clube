@@ -9,10 +9,13 @@ export const loginSchema = Joi.object({
   email: Joi.string().email().required().messages({
     'string.required': notEmpty,
     'string.email': 'Incorrect email or password',
-    'string.empty': notEmpty }),
+    'string.empty': notEmpty,
+  }),
   password: Joi.string().required().min(minimalPasswordChars).messages({
     'string.required': notEmpty,
-    'string.empty': notEmpty }) });
+    'string.empty': notEmpty,
+  }),
+});
 
 const loginValidationMid = async (req:Request, res:Response, next:NextFunction) => {
   const { email, password } = req.body;
