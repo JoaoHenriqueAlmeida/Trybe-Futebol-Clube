@@ -1,6 +1,6 @@
-import * as fs from 'fs';
-import * as jwt from 'jsonwebtoken';
-import * as bcryptjs from 'bcryptjs';
+import fs = require('fs');
+import jwt = require('jsonwebtoken');
+import bcryptjs = require('bcryptjs');
 import Users from '../database/models/Users';
 import responseGenerator from '../utils/resGenerator';
 import StatusCodes from '../utils/StatusCodes';

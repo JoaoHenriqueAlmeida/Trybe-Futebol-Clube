@@ -1,5 +1,5 @@
-import * as express from 'express';
-import * as cors from 'cors';
+import express = require('express');
+import cors = require('cors');
 import loginRouter from './routers/loginRouter';
 
 class App {
@@ -26,7 +26,7 @@ class App {
   }
 
   public start(PORT: string | number):void {
-    this.app.listen(PORT, () => console.log(`Rodando na porta ${PORT}`));
+    this.app.listen(PORT, () => `Rodando na porta ${PORT}`);
   }
 }
 
