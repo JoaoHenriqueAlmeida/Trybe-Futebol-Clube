@@ -9,7 +9,7 @@ import { Response } from 'superagent'
 
 chai.use(chaiHttp);
 
-const {expect} = chai;
+const { expect } = chai;
 
 describe('Testa algo', () => {
   it('deveria fazer algo', () => {
