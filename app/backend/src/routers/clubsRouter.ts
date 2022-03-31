@@ -6,4 +6,5 @@ const router = Router();
 
 router.get('/', getAll);
 router.get('/:id', clubIdMiddleware, getById);
+
 export default router;

@@ -4,7 +4,7 @@ import StatusCodes from '../utils/StatusCodes';
 
 export const idSchema = Joi.object({
   id: Joi.number().required(),
-}).strict();
+});
 
 const clubIdMiddleware = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;

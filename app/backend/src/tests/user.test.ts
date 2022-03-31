@@ -8,15 +8,13 @@ import Users from '../database/models/Users'
 
 import { Response } from 'superagent';
 import { foundUserMock, loginResponseMock, accurateRequestInfo } from './mocks/userMocks';
-import { assert } from 'console';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 
 describe('Em caso de sucesso no método POST do endpoint /login:', () => {
-  let chaiHttpRes:Response 
-  
+  let chaiHttpRes:Response ;
   
   before(async () => {
     sinon.stub(Users, 'findOne').resolves(foundUserMock as Users);

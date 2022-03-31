@@ -1,5 +1,3 @@
-import { string } from "joi"
-
 export const foundUserMock = {
   id: 1,
   username: "Admin",

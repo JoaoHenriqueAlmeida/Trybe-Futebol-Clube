@@ -5,7 +5,7 @@ import responseGenerator from '../utils/resGenerator';
 export const getAllClubs = async () => {
   const allClubs = await Clubs.findAll();
 
-  if (!allClubs) {
+  if (!allClubs.length) {
     return responseGenerator(StatusCodes.NotFound, 'Could not find any Teams');
   }
 
