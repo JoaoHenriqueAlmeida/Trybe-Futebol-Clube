@@ -6,11 +6,10 @@ export const idSchema = Joi.object({
   id: Joi.number().required(),
 });
 
-const clubIdMiddleware = async (req:Request, res:Response, next:NextFunction) => {
+export const clubIdMiddleware = async (req:Request, res:Response, next:NextFunction) => {
   const { id } = req.params;
-  const idToNumber = Number(id);
 
-  const { error } = idSchema.validate({ idToNumber });
+  const { error } = idSchema.validate({ id });
 
   if (error) {
     return res.status(StatusCodes.Unauthorized).json({ message: error.message });

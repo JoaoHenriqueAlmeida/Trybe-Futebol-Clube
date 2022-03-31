@@ -25,9 +25,12 @@ describe('Em caso de sucesso no método GET do endpoint /clubs', () => {
 
   it('Deveria retornar status 200', async () => {
     chaiHttpRes = await chai.request(app).get('/clubs');
-    const { status, body } = chaiHttpRes;
-    expect(status).to.equal(200);
-    expect(body).to.be.equal(foundClubsMock);
+    expect(chaiHttpRes.status).to.equal(200);
+  })
+
+  it('Deveria retornar um objeto com todos os clubes', async () => {
+    chaiHttpRes = await chai.request(app).get('/clubs');
+    expect(chaiHttpRes.body).to.deep.equal(foundClubsMock);
   })
 })
 
@@ -44,8 +47,11 @@ describe('Em caso de sucesso no método GET do endpoint /clubs:id', () => {
 
   it('Deveria retornar status 200', async () => {
     chaiHttpRes = await chai.request(app).get('/clubs/1');
-    const { status, body } = chaiHttpRes;
-    expect(status).to.equal(200);
-    expect(body).to.deep.equal(foundClubsMock[0]);
+    expect(chaiHttpRes.status).to.equal(200);
+  })
+
+  it('Deve retornar o clube esperado', async () => {
+    chaiHttpRes = await chai.request(app).get('/clubs/1');
+    expect(chaiHttpRes.body).to.deep.equal([foundClubsMock[0]]);
   })
 })
