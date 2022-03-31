@@ -1,6 +1,7 @@
 import express = require('express');
 import cors = require('cors');
 import loginRouter from './routers/loginRouter';
+import clubsRouter from './routers/clubsRouter';
 
 class App {
   public app: express.Express;
@@ -23,6 +24,7 @@ class App {
     this.app.use(cors());
 
     this.app.use('/login', loginRouter);
+    this.app.use('/clubs', clubsRouter);
   }
 
   public start(PORT: string | number):void {
