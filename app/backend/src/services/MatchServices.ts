@@ -3,6 +3,9 @@ import Clubs from '../database/models/Clubs';
 
 import responseGenerator from '../utils/resGenerator';
 import StatusCodes from '../utils/StatusCodes';
+import checkJWT from '../utils/checkJWT';
+
+import IMatch from '../interfaces/IMatch';
 
 export const getMatchesArray = async () => {
   const matchesArray = await Matches.findAll({
@@ -33,4 +36,23 @@ export const getInProgressMatches = async (inProgress: boolean) => {
   }
 
   return responseGenerator(StatusCodes.OK, '', matchesArray);
+};
+
+export const createNewMatch = async (match:IMatch, token:string) => {
+  try {
+    const user = await checkJWT(token);
+
+    if (!user) { return responseGenerator(StatusCodes.Unauthorized, 'Invalid Token'); }
+
+    const [homeTeamId, awayTeamId] = await Promise.all([
+      Clubs.findOne({ where: { id: match.homeTeam } }),
+      Clubs.findOne({ where: { id: match.awayTeam } }),
+    ]);
+
+    if (!homeTeamId || awayTeamId) {
+      return responseGenerator(StatusCodes.Unauthorized, 'There is no team with such id!');
+    }
+  } catch (error) {
+
+  }
 };
