@@ -8,7 +8,7 @@ export const getMatchesArray = async () => {
   const matchesArray = await Matches.findAll({
     include: [
       { model: Clubs, as: 'homeClubs', attributes: { exclude: ['id'] } },
-      {},
+      { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
     ],
   });
 
@@ -24,7 +24,7 @@ export const getInProgressMatches = async (inProgress: boolean) => {
     where: { inProgress },
     include: [
       { model: Clubs, as: 'homeClubs', attributes: { exclude: ['id'] } },
-      {},
+      { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
     ],
   });
 
