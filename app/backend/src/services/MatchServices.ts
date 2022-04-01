@@ -38,7 +38,7 @@ export const getInProgressMatches = async (inProgress: boolean) => {
   return responseGenerator(StatusCodes.OK, '', matchesArray);
 };
 
-export const createNewMatch = async (match:IMatch, token:string) => {
+export const insertNewMatch = async (match:IMatch, token:string) => {
   try {
     const user = await checkJWT(token);
 
@@ -52,7 +52,13 @@ export const createNewMatch = async (match:IMatch, token:string) => {
     if (!homeTeamId || awayTeamId) {
       return responseGenerator(StatusCodes.Unauthorized, 'There is no team with such id!');
     }
-  } catch (error) {
 
+    const insertedMatch = Matches.create(match);
+    if (!insertedMatch) {
+      return responseGenerator(StatusCodes.BadRequest, 'Could not create the match specified');
+    }
+    return responseGenerator(StatusCodes.OK, '', insertedMatch);
+  } catch (error) {
+    return responseGenerator(StatusCodes.Unauthorized, 'Invalid Token');
   }
 };
