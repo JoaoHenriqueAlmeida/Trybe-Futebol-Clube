@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi = require('joi');
-import StatusCodes from '../utils/StatusCodes';
+import StatusCodes from './utils/StatusCodes';
 
 const matchSchema = Joi.object({
   homeTeam: Joi.required(),
@@ -18,8 +18,18 @@ const matchValidationMiddleware = async (req:Request, res:Response, next:NextFun
   if (!awayTeamGoals || !homeTeamGoals || !inProgress) {
     return res.status(StatusCodes.Unauthorized).json({ message: 'There is no team with such id!' });
   }
-
+  const match = { homeTeam, awayTeam };
   const { error } = matchSchema.validate({ ...match, auth });
+
+  if (error) {
+    return res.status(StatusCodes.Unauthorized).json({ message: error.message });
+  }
+
+  if (homeTeam === awayTeam) {
+    return res.status(StatusCodes.Unauthorized).json({
+      message: 'It is not possible to create a match with two equal teams',
+    });
+  }
   return next();
 };
 
