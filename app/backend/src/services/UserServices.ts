@@ -4,13 +4,14 @@ import bcryptjs = require('bcryptjs');
 import Users from '../database/models/Users';
 import responseGenerator from '../utils/resGenerator';
 import StatusCodes from '../utils/StatusCodes';
+import checkJWT from '../utils/checkJWT';
 
 interface IUserLogin {
   email:string,
   password: string,
 }
 
-const login = async ({ email, password }:IUserLogin) => {
+export const login = async ({ email, password }:IUserLogin) => {
   const getByEmail = await Users.findOne({ where: { email } });
 
   const invalidCredentials = 'Incorrect email or password';
@@ -37,4 +38,12 @@ const login = async ({ email, password }:IUserLogin) => {
   return responseGenerator(StatusCodes.OK, '', payload);
 };
 
-export default login;
+export const getUserRole = async (authorization:string) => {
+  const user = await checkJWT(authorization);
+
+  if (!user) {
+    return responseGenerator(StatusCodes.Unauthorized, 'Invalid Token');
+  }
+
+  return responseGenerator(StatusCodes.OK, '', user.role);
+};
