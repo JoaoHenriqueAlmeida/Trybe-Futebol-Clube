@@ -69,7 +69,7 @@ export const updateMatch = async ({ id, homeTeamGoals, awayTeamGoals }:IMatchToU
   if (!updatedMatch) {
     return responseGenerator(StatusCodes.NotFound, 'Match not found');
   }
-  return (StatusCodes.OK, '', { sucess: 'Match edited successfully' });
+  return responseGenerator(StatusCodes.OK, '', { sucess: 'Match edited successfully' });
 };
 
 export const endMatch = async (id:number) => {
@@ -77,5 +77,5 @@ export const endMatch = async (id:number) => {
   if (!finishedMatch) {
     return responseGenerator(StatusCodes.NotFound, 'Match not found');
   }
-  return (StatusCodes.OK, '', { sucess: 'Match finished successfully' });
+  return responseGenerator(StatusCodes.OK, '', { sucess: 'Match finished successfully' });
 };
