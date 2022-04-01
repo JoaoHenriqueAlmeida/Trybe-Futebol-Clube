@@ -18,8 +18,8 @@ const matchValidationMiddleware = async (req:Request, res:Response, next:NextFun
   if (!awayTeamGoals || !homeTeamGoals || !inProgress) {
     return res.status(StatusCodes.Unauthorized).json({ message: 'There is no team with such id!' });
   }
-  type JoiMatch = { homeTeam: number | string, awayTeam: number | string };
-  const joiMatch:JoiMatch = { homeTeam, awayTeam };
+
+  const joiMatch = { homeTeam, awayTeam };
   const { error } = matchSchema.validate({ ...joiMatch, auth });
 
   if (error) {
