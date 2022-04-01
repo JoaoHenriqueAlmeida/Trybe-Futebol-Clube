@@ -18,8 +18,19 @@ const matchValidationMiddleware = async (req:Request, res:Response, next:NextFun
   if (!awayTeamGoals || !homeTeamGoals || !inProgress) {
     return res.status(StatusCodes.Unauthorized).json({ message: 'There is no team with such id!' });
   }
+  type JoiMatch = { homeTeam: number | string, awayTeam: number | string };
+  const joiMatch:JoiMatch = { homeTeam, awayTeam };
+  const { error } = matchSchema.validate({ ...joiMatch, auth });
 
-  const { error } = matchSchema.validate({ ...match, auth });
+  if (error) {
+    return res.status(StatusCodes.Unauthorized).json({ message: error.message });
+  }
+
+  if (homeTeam === awayTeam) {
+    return res.status(StatusCodes.Unauthorized).json({
+      message: 'It is not possible to create a match with two equal teams',
+    });
+  }
   return next();
 };
 
