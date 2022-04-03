@@ -34,7 +34,7 @@ Users.init({
 }, {
   underscored: true,
   sequelize: db,
-  timestamps: false 
+  timestamps: false,
 });
 
 export default Users;
