@@ -11,7 +11,7 @@ import { IMatchToUpdate } from '../interfaces/IMatchToUpdate';
 export const getMatchesArray = async () => {
   const matchesArray = await Matches.findAll({
     include: [
-      { model: Clubs, as: 'homeClubs', attributes: { exclude: ['id'] } },
+      { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
       { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
     ],
   });
@@ -27,7 +27,7 @@ export const getInProgressMatches = async (inProgress: boolean) => {
   const matchesArray = await Matches.findAll({
     where: { inProgress },
     include: [
-      { model: Clubs, as: 'homeClubs', attributes: { exclude: ['id'] } },
+      { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
       { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
     ],
   });

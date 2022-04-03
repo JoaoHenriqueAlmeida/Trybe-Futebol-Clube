@@ -9,12 +9,12 @@ import {
 import IMatch from '../interfaces/IMatch';
 
 export const getAll = async (req:Request, res:Response, next:NextFunction) => {
-  const { status, message, data } = await getMatchesArray();
-
   const { inProgress } = req.query;
   if (inProgress) {
     next();
   }
+
+  const { status, message, data } = await getMatchesArray();
 
   if (status >= StatusCodes.Unauthorized) {
     return res.status(status).json({ message });
