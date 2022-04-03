@@ -11,7 +11,7 @@ import IMatch from '../interfaces/IMatch';
 export const getAll = async (req:Request, res:Response, next:NextFunction) => {
   const { inProgress } = req.query;
   if (inProgress) {
-    next();
+    return next();
   }
 
   const { status, message, data } = await getMatchesArray();
