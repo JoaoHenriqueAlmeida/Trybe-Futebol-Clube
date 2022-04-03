@@ -9,7 +9,7 @@ import {
 const router = Router();
 
 router.get('/', getAll, getInProgress);
-router.post('', matchValidationMiddleware, createNewMatch);
+router.post('/', matchValidationMiddleware, createNewMatch);
 router.patch('/:id', updateById);
 router.patch('/:id/finish', finishById);
 
