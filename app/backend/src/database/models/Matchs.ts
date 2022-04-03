@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import db from '.';
 
-class Matches extends Model {
+class Matchs extends Model {
   public id:number;
 
   public homeTeam:number;
@@ -15,7 +15,7 @@ class Matches extends Model {
   public inProgress:number;
 }
 
-Matches.init({
+Matchs.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -42,4 +42,4 @@ Matches.init({
   timestamps: false,
 });
 
-export default Matches;
+export default Matchs;

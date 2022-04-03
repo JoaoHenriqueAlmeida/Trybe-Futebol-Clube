@@ -1,4 +1,4 @@
-import Matches from '../database/models/Matches';
+import Matchs from '../database/models/Matchs';
 import Clubs from '../database/models/Clubs';
 
 import responseGenerator from '../utils/resGenerator';
@@ -9,7 +9,7 @@ import IMatch from '../interfaces/IMatch';
 import { IMatchToUpdate } from '../interfaces/IMatchToUpdate';
 
 export const getMatchesArray = async () => {
-  const matchesArray = await Matches.findAll({
+  const matchesArray = await Matchs.findAll({
     include: [
       { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
       { model: Clubs, as: 'awayClub', attributes: { exclude: ['id'] } },
@@ -24,7 +24,7 @@ export const getMatchesArray = async () => {
 };
 
 export const getInProgressMatches = async (inProgress: boolean) => {
-  const matchesArray = await Matches.findAll({
+  const matchesArray = await Matchs.findAll({
     where: { inProgress },
     include: [
       { model: Clubs, as: 'homeClub', attributes: { exclude: ['id'] } },
@@ -54,7 +54,7 @@ export const insertNewMatch = async (match:IMatch, token:string) => {
       return responseGenerator(StatusCodes.Unauthorized, 'There is no team with such id!');
     }
 
-    const insertedMatch = Matches.create(match);
+    const insertedMatch = Matchs.create(match);
     if (!insertedMatch) {
       return responseGenerator(StatusCodes.BadRequest, 'Could not create the match specified');
     }
@@ -65,7 +65,7 @@ export const insertNewMatch = async (match:IMatch, token:string) => {
 };
 
 export const updateMatch = async ({ id, homeTeamGoals, awayTeamGoals }:IMatchToUpdate) => {
-  const updatedMatch = await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+  const updatedMatch = await Matchs.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   if (!updatedMatch) {
     return responseGenerator(StatusCodes.NotFound, 'Match not found');
   }
@@ -73,7 +73,7 @@ export const updateMatch = async ({ id, homeTeamGoals, awayTeamGoals }:IMatchToU
 };
 
 export const endMatch = async (id:number) => {
-  const finishedMatch = await Matches.update({ inProgress: false }, { where: { id } });
+  const finishedMatch = await Matchs.update({ inProgress: false }, { where: { id } });
   if (!finishedMatch) {
     return responseGenerator(StatusCodes.NotFound, 'Match not found');
   }
