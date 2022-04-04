@@ -5,10 +5,10 @@ import ILeaderboardInfo from '../../interfaces/ILeaderboardInfo';
 
 const sortInfo = (info:ILeaderboardInfo[]) => info.sort(
   (teamA:ILeaderboardInfo, teamB:ILeaderboardInfo) =>
-    teamB.points - teamA.points
+    teamB.totalPoints - teamA.totalPoints
     || teamB.goalsBalance - teamA.goalsBalance
-    || teamB.goalsInFavor - teamA.goalsInFavor
-    || teamA.goalsTaken - teamB.goalsTaken,
+    || teamB.goalsFavor - teamA.goalsFavor
+    || teamA.goalsOwn - teamB.goalsOwn,
 );
 
 const getMatchesFromEachTeam = async (

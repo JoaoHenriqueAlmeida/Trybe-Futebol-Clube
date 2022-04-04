@@ -13,58 +13,58 @@ interface IParams {
 const getLeaderboardInfo = (
   { id, teamName, matchesCurrTeam, filterByHome, filterByAway }:IParams,
 ):ILeaderBoardInfo => {
-  let points = 0;
-  let wins = 0;
-  let draws = 0;
-  let losses = 0;
-  let goalsInFavor = 0;
-  let goalsTaken = 0;
+  let totalPoints = 0;
+  let totalVictories = 0;
+  let totalDraws = 0;
+  let totalLosses = 0;
+  let goalsFavor = 0;
+  let goalsOwn = 0;
   let goalsBalance = 0;
-  let games = 0;
+  let totalGames = 0;
 
   matchesCurrTeam.forEach((match:Matchs) => {
     if (filterByHome && match.homeTeam === id) {
-      games += 1;
+      totalGames += 1;
       if (match.homeTeamGoals > match.awayTeamGoals) {
-        points += 3;
-        wins += 1;
+        totalPoints += 3;
+        totalVictories += 1;
       } else if (match.homeTeamGoals < match.awayTeamGoals) {
-        losses += 1;
+        totalLosses += 1;
       } else {
-        draws += 1;
-        points += 1;
+        totalDraws += 1;
+        totalPoints += 1;
       }
-      goalsInFavor += match.homeTeamGoals;
-      goalsTaken += match.awayTeamGoals;
-      goalsBalance = goalsInFavor - goalsTaken;
+      goalsFavor += match.homeTeamGoals;
+      goalsOwn += match.awayTeamGoals;
+      goalsBalance = goalsFavor - goalsOwn;
     }
     if (filterByAway && match.awayTeam === id) {
-      games += 1;
+      totalGames += 1;
       if (match.awayTeamGoals > match.homeTeamGoals) {
-        points += 3;
-        wins += 1;
+        totalPoints += 3;
+        totalVictories += 1;
       } else if (match.awayTeamGoals < match.homeTeamGoals) {
-        losses += 1;
+        totalLosses += 1;
       } else {
-        draws += 1;
-        points += 1;
+        totalDraws += 1;
+        totalPoints += 1;
       }
-      goalsInFavor += match.awayTeamGoals;
-      goalsTaken += match.homeTeamGoals;
-      goalsBalance = goalsInFavor - goalsTaken;
+      goalsFavor += match.awayTeamGoals;
+      goalsOwn += match.homeTeamGoals;
+      goalsBalance = goalsFavor - goalsOwn;
     }
   });
-  const teamEfficiency = ((points / (games * 3)) * 100).toFixed(2);
+  const teamEfficiency = ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
   return {
     teamName,
-    points,
-    wins,
-    draws,
-    losses,
-    goalsInFavor,
-    goalsTaken,
+    totalPoints,
+    totalVictories,
+    totalDraws,
+    totalLosses,
+    goalsFavor,
+    goalsOwn,
     goalsBalance,
-    games,
+    totalGames,
     efficiency: Number(teamEfficiency),
   };
 };
