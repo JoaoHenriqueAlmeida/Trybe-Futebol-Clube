@@ -3,6 +3,7 @@ import cors = require('cors');
 import loginRouter from './routers/loginRouter';
 import clubsRouter from './routers/clubsRouter';
 import matchRouter from './routers/matchRouter';
+import leaderboardRouter from './routers/leaderboardRouter';
 
 class App {
   public app: express.Express;
@@ -27,6 +28,7 @@ class App {
     this.app.use('/login', loginRouter);
     this.app.use('/clubs', clubsRouter);
     this.app.use('/matchs', matchRouter);
+    this.app.use('/leaderboard', leaderboardRouter);
   }
 
   public start(PORT: string | number):void {
