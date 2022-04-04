@@ -56,7 +56,7 @@ const getLeaderboardInfo = (
   });
   const teamEfficiency = ((totalPoints / (totalGames * 3)) * 100).toFixed(2);
   return {
-    teamName,
+    name: teamName,
     totalPoints,
     totalVictories,
     totalDraws,
