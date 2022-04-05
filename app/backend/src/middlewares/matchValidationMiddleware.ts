@@ -15,12 +15,12 @@ type TeamTypes = { homeTeam:number | string, awayTeam:number | string };
 
 const matchValidationMiddleware = async (req:Request, res:Response, next:NextFunction) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
-  const auth = req.headers.authorization || '';
 
-  if (!awayTeamGoals || !homeTeamGoals || !inProgress) {
+  if (awayTeamGoals === undefined || homeTeamGoals === undefined || !inProgress) {
     return res.status(StatusCodes.Unauthorized).json({ message: 'There is no team with such id!' });
   }
 
+  const auth = req.headers.authorization || '';
   const joiMatch:TeamTypes = { homeTeam, awayTeam };
   const { error } = matchSchema.validate({ ...joiMatch, auth });
 

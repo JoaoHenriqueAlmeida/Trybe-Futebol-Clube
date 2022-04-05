@@ -2,7 +2,8 @@ import { Router } from 'express';
 import matchValidationMiddleware from '../middlewares/matchValidationMiddleware';
 import {
   getInProgress,
-  getAll, createNewMatch,
+  getAll,
+  createNewMatch,
   updateById,
   finishById } from '../controllers/MatchController';
 
