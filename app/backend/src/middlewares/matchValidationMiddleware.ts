@@ -11,7 +11,9 @@ const matchSchema = Joi.object({
   }),
 }).strict();
 
-type TeamTypes = { homeTeam:number | string, awayTeam:number | string };
+const verifyTeamsEquality = (teamOne:number, teamTwo:number) => (
+  teamOne === teamTwo ? 'It is not possible to create a match with two equal teams' : ''
+);
 
 const matchValidationMiddleware = async (req:Request, res:Response, next:NextFunction) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
@@ -21,6 +23,7 @@ const matchValidationMiddleware = async (req:Request, res:Response, next:NextFun
   }
 
   const auth = req.headers.authorization || '';
+  type TeamTypes = { homeTeam:number | string, awayTeam:number | string };
   const joiMatch:TeamTypes = { homeTeam, awayTeam };
   const { error } = matchSchema.validate({ ...joiMatch, auth });
 
@@ -28,11 +31,11 @@ const matchValidationMiddleware = async (req:Request, res:Response, next:NextFun
     return res.status(StatusCodes.Unauthorized).json({ message: error.message });
   }
 
-  if (homeTeam === awayTeam) {
-    return res.status(StatusCodes.Unauthorized).json({
-      message: 'It is not possible to create a match with two equal teams',
-    });
+  const getEqualityInfo = verifyTeamsEquality(homeTeam, awayTeam);
+  if (getEqualityInfo) {
+    return res.status(StatusCodes.Unauthorized).json({ message: getEqualityInfo });
   }
+
   return next();
 };
 
