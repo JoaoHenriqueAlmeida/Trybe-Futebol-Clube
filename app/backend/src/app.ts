@@ -1,5 +1,5 @@
 import express = require('express');
-import cors = require('cors');
+import * as cors from 'cors';
 import loginRouter from './routers/loginRouter';
 import clubsRouter from './routers/clubsRouter';
 import matchRouter from './routers/matchRouter';

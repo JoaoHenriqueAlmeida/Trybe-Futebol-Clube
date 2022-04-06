@@ -16,7 +16,7 @@ export const getAll = async (req:Request, res:Response, next:NextFunction) => {
 
   const { status, message, data } = await getMatchesArray();
 
-  if (status >= StatusCodes.Unauthorized) {
+  if (status >= StatusCodes.BadRequest) {
     return res.status(status).json({ message });
   }
 
@@ -28,7 +28,7 @@ export const getInProgress = async (req:Request, res:Response) => {
 
   const { status, message, data } = await getInProgressMatches(inProgress === 'true');
 
-  if (status >= StatusCodes.Unauthorized) {
+  if (status >= StatusCodes.BadRequest) {
     return res.status(status).json({ message });
   }
 
@@ -37,11 +37,11 @@ export const getInProgress = async (req:Request, res:Response) => {
 
 export const createNewMatch = async (req:Request, res:Response) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
-  const auth = req.headers.authorization || '';
+  const authorization = req.headers.authorization || '';
   const match:IMatch = { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress };
 
-  const { status, message, data } = await insertNewMatch(match, auth);
-  if (status >= StatusCodes.Unauthorized) {
+  const { status, message, data } = await insertNewMatch(match, authorization);
+  if (status >= StatusCodes.BadRequest) {
     return res.status(status).json({ message });
   }
 
@@ -55,7 +55,7 @@ export const updateById = async (req:Request, res:Response) => {
     homeTeamGoals,
     awayTeamGoals,
   });
-  if (status >= StatusCodes.Unauthorized) {
+  if (status >= StatusCodes.BadRequest) {
     return res.status(status).json({ message });
   }
 
@@ -65,7 +65,7 @@ export const updateById = async (req:Request, res:Response) => {
 export const finishById = async (req:Request, res:Response) => {
   const { id } = req.params;
   const { status, message, data } = await endMatch(Number(id));
-  if (status >= StatusCodes.Unauthorized) {
+  if (status >= StatusCodes.BadRequest) {
     return res.status(status).json({ message });
   }
 
