@@ -50,7 +50,7 @@ export const insertNewMatch = async (match:IMatch, token:string) => {
       Clubs.findOne({ where: { id: match.awayTeam } }),
     ]);
 
-    if (!homeTeamId || awayTeamId) {
+    if (!homeTeamId || !awayTeamId) {
       return responseGenerator(StatusCodes.Unauthorized, 'There is no team with such id!');
     }
 

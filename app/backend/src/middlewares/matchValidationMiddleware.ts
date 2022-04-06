@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import Joi = require('joi');
 import StatusCodes from '../utils/StatusCodes';
 
-const matchSchema = Joi.object({
+export const matchSchema = Joi.object({
   homeTeam: Joi.required(),
   awayTeam: Joi.required(),
   authorization: Joi.string().required().messages({
