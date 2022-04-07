@@ -58,7 +58,7 @@ export const insertNewMatch = async (match:IMatch, token:string) => {
     if (!insertedMatch) {
       return responseGenerator(StatusCodes.BadRequest, 'Could not create the match specified');
     }
-    return responseGenerator(StatusCodes.OK, '', insertedMatch);
+    return responseGenerator(StatusCodes.Created, '', insertedMatch);
   } catch (error) {
     return responseGenerator(StatusCodes.Unauthorized, 'Invalid Token');
   }

@@ -25,9 +25,10 @@ class App {
     this.app.use(express.json());
     this.app.use(cors());
 
+    this.app.use('/matchs', matchRouter);
     this.app.use('/login', loginRouter);
     this.app.use('/clubs', clubsRouter);
-    this.app.use('/matchs', matchRouter);
+
     this.app.use('/leaderboard', leaderboardRouter);
   }
 
