@@ -6,7 +6,7 @@ export const schemeMatch = Joi.object({
   homeTeam: Joi.number().required(),
   awayTeam: Joi.number().required(),
   authorization: Joi.string().required().messages({
-    'string.required': 'Invalid Token',
+    'any.required': 'Invalid Token',
     'string.empty': 'Invalid Token',
   }),
 }).strict();
@@ -31,6 +31,8 @@ const matchValidationMiddleware = async (req: Request, res: Response, next: Next
   if (error) {
     return res.status(StatusCodes.Unauthorized).json({ message: error.message });
   }
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY0OTIzMjA2MH0.vdk_ZARzb_GaHbmsM1Y2dvjn1pf8dh62gwb0MYq-haE
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY0OTIzMjA2MH0.vdk_ZARzb_GaHbmsM1Y2dvjn1pf8dh62gwb0MYq-haE
   const verifyEquality = verifyTeamEquality(homeTeam, awayTeam);
   if (verifyEquality) {
     return res.status(StatusCodes.Unauthorized).json({ message: verifyEquality });
