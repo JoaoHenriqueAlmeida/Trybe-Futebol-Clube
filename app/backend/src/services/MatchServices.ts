@@ -3,7 +3,7 @@ import Clubs from '../database/models/Clubs';
 
 import responseGenerator from '../utils/resGenerator';
 import StatusCodes from '../utils/StatusCodes';
-import { checkJWT } from '../utils/jwtUtils';
+import checkJWT from '../utils/checkJWT';
 
 import IMatch from '../interfaces/IMatch';
 import { IMatchToUpdate } from '../interfaces/IMatchToUpdate';
@@ -42,6 +42,7 @@ export const getInProgressMatches = async (inProgress: boolean) => {
 export const insertNewMatch = async (match:IMatch, token:string) => {
   try {
     const user = await checkJWT(token);
+
     if (!user) { return responseGenerator(StatusCodes.Unauthorized, 'Invalid Token'); }
 
     const [homeTeamId, awayTeamId] = await Promise.all([
