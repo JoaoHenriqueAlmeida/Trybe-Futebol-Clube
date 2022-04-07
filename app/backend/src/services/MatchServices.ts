@@ -54,7 +54,7 @@ export const insertNewMatch = async (match:IMatch, token:string) => {
       return responseGenerator(StatusCodes.Unauthorized, 'There is no team with such id!');
     }
 
-    const insertedMatch = Matchs.create(match);
+    const insertedMatch = await Matchs.create(match);
     if (!insertedMatch) {
       return responseGenerator(StatusCodes.BadRequest, 'Could not create the match specified');
     }

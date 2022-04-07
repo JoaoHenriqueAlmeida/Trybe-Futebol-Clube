@@ -45,7 +45,7 @@ export const createNewMatch = async (req:Request, res:Response) => {
   if (status >= StatusCodes.Unauthorized) {
     return res.status(status).json({ message });
   }
-
+  console.log(data);
   return res.status(status).json(data);
 };
 

@@ -27,12 +27,11 @@ const matchValidationMiddleware = async (req: Request, res: Response, next: Next
   const { authorization } = req.headers;
   const match: MatchJoi = { homeTeam, awayTeam };
   const { error } = schemeMatch.validate({ ...match, authorization });
-  console.log(error);
+
   if (error) {
     return res.status(StatusCodes.Unauthorized).json({ message: error.message });
   }
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY0OTIzMjA2MH0.vdk_ZARzb_GaHbmsM1Y2dvjn1pf8dh62gwb0MYq-haE
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmNvbSIsImlhdCI6MTY0OTIzMjA2MH0.vdk_ZARzb_GaHbmsM1Y2dvjn1pf8dh62gwb0MYq-haE
+
   const verifyEquality = verifyTeamEquality(homeTeam, awayTeam);
   if (verifyEquality) {
     return res.status(StatusCodes.Unauthorized).json({ message: verifyEquality });
