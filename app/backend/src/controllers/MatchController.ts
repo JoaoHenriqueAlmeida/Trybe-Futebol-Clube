@@ -32,7 +32,7 @@ export const getInProgress = async (req:Request, res:Response) => {
     return res.status(status).json({ message });
   }
 
-  return res.status(StatusCodes.OK).json(data);
+  return res.status(status).json(data);
 };
 
 export const createNewMatch = async (req:Request, res:Response) => {
@@ -46,7 +46,7 @@ export const createNewMatch = async (req:Request, res:Response) => {
     return res.status(status).json({ message });
   }
 
-  return res.status(StatusCodes.OK).json(data);
+  return res.status(status).json(data);
 };
 
 export const updateById = async (req:Request, res:Response) => {
@@ -60,7 +60,7 @@ export const updateById = async (req:Request, res:Response) => {
     return res.status(status).json({ message });
   }
 
-  return res.status(StatusCodes.OK).json(data);
+  return res.status(status).json(data);
 };
 
 export const finishById = async (req:Request, res:Response) => {
@@ -70,5 +70,5 @@ export const finishById = async (req:Request, res:Response) => {
     return res.status(status).json({ message });
   }
 
-  return res.status(StatusCodes.OK).json(data);
+  return res.status(status).json(data);
 };
