@@ -38,6 +38,7 @@ export const getInProgress = async (req:Request, res:Response) => {
 export const createNewMatch = async (req:Request, res:Response) => {
   const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress } = req.body;
   const auth = req.headers.authorization || '';
+  console.log(auth);
   const match:IMatch = { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals, inProgress };
 
   const { status, message, data } = await insertNewMatch(match, auth);
